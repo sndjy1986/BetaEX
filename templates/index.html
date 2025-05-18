@@ -55,7 +55,7 @@ body.dark-mode {
     <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
 </div>
 
-    <h1>Dispatch Center</h1>
+    <h1>Medshore Dispatch Dashboard</h1>
 
     <!-- System Status Box -->
     <div class="status-box {% if available_trucks <= 3 %}blink-red{% endif %}">
@@ -84,15 +84,15 @@ body.dark-mode {
                 <li id="truck-{{ truck.id }}">
                     <span class="{% if truck.id in flash_trucks %}flash{% endif %}">{{ truck.id }}</span>:
                     <span class="{% if truck.id in flash_trucks %}flash {% endif %}
-                        {% if status[truck.id] == 'available' %}status-available
-                        {% elif status[truck.id] == 'out' %}status-out
-                        {% elif status[truck.id] == 'logistics' %}status-logistics
-                        {% elif status[truck.id] == 'destination' %}status-destination
+                        {% if status[truck.id] == 'Available' %}status-available
+                        {% elif status[truck.id] == 'Out' %}status-out
+                        {% elif status[truck.id] == 'Logistics' %}status-logistics
+                        {% elif status[truck.id] == 'Destination' %}status-destination
                         {% endif %}">
                         {{ status[truck.id] }}
                     </span>
 
-                    {% if status[truck.id] == "logistics" or status[truck.id] == "destination" %}
+                    {% if status[truck.id] == "Logistics" or status[truck.id] == "Destination" %}
                         <span id="timer-{{ truck.id }}" data-start="{{ logistics_times[truck.id] }}"></span>
                         {% if status[truck.id] == "logistics" %}
                             <a href="/reset/{{ truck.id }}">[Reset]</a>
@@ -100,10 +100,10 @@ body.dark-mode {
                             <a href="/reset/{{ truck.id }}">[Reset]</a>
                         {% endif %}
                     {% elif status[truck.id] == "out" %}
-                        <a href="/destination/{{ truck.id }}">[Destination]</a>
-                        <a href="/reset/{{ truck.id }}">[Back]</a>
+                        <a href="/Destination/{{ truck.id }}">[Destination]</a>
+                        <a href="/Reset/{{ truck.id }}">[Back]</a>
                     {% elif status[truck.id] == "available" %}
-                        <a href="/logistics/{{ truck.id }}">[Logistics]</a>
+                        <a href="/Logistics/{{ truck.id }}">[Logistics]</a>
                     {% endif %}
                 </li>
             {% endif %}
