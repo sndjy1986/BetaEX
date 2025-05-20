@@ -1,0 +1,20 @@
+{
+  "trucks": [
+    {
+      "id": "Medic 0",
+      "location": "Station 0"
+    },
+    {
+      "id": "Medic 1",
+      "location": "Station 1"
+    },
+    {
+      "id": "Medic 2",
+      "location": "Station 2"
+    },
+    {
+      "id": "Medic 3",
+      "location": "Station 3"
+    }
+  ]
+}
