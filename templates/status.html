@@ -82,8 +82,8 @@ body.dark-mode {
 </p>
 <ul>
 {% for truck in trucks %}
-    {% if status[truck.id] != 'unavailable' and (not only_avail or status[truck.id] == 'available') %}
-    <li class="status-{{ status[truck.id] }}">{{ truck.id }} — {{ status[truck.id]|capitalize }}</li>
+    {% if status[truck['id']] != 'unavailable' and (not only_avail or status[truck['id']] == 'available') %}
+    <li class="status-{{ status[truck['id']] }}">{{ truck['id'] }} — {{ status[truck['id']]|capitalize }}</li>
     {% endif %}
 {% endfor %}
 </ul>

@@ -46,17 +46,17 @@ body.dark-mode {
 <form method="POST">
 <ul>
             {% for truck in trucks %}
-                {% if status[truck.id] not in ["out", "logistics"] %}
+                {% if status[truck['id']] not in ["out", "logistics"] %}
                     <li>
 <label>
-<input %}="" %}checked{%="" endif="" if="" name="available" status[truck.id]="available" type="checkbox" value="{{ truck.id }}" {%=""/>
-                            {{ truck.id }} ({{ truck.location }})
+<input %}="" %}checked{%="" endif="" if="" name="available" status[truck['id']]="available" type="checkbox" value="{{ truck['id'] }}" {%=""/>
+                            {{ truck['id'] }} ({{ truck.location }})
                         </label>
 </li>
                 {% else %}
                     <li>
-                        {{ truck.id }} ({{ truck.location }}) is currently
-                        "<strong>{{ status[truck.id] }}</strong>" — cannot update.
+                        {{ truck['id'] }} ({{ truck.location }}) is currently
+                        "<strong>{{ status[truck['id']] }}</strong>" — cannot update.
                     </li>
                 {% endif %}
             {% endfor %}
