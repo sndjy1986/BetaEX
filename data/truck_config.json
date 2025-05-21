@@ -1,133 +1,42 @@
 {
-    "trucks": [
-        {
-            "id": "Medic 0",
-            "location": "City // HQ"
-        },
-        {
-            "id": "Medic 1",
-            "location": "City // HQ"
-        },
-        {
-            "id": "Medic 2",
-            "location": "Rock Springs"
-        },
-        {
-            "id": "Medic 3",
-            "location": "Homeland Park"
-        },
-        {
-            "id": "Medic 4",
-            "location": "Williamston"
-        },
-        {
-            "id": "Medic 5",
-            "location": "Hopewell"
-        },
-        {
-            "id": "Medic 6",
-            "location": "Iva"
-        },
-        {
-            "id": "Medic 7",
-            "location": "Pendleton"
-        },
-        {
-            "id": "Medic 8",
-            "location": "Townville"
-        },
-        {
-            "id": "Medic 9",
-            "location": "Centerville"
-        },
-        {
-            "id": "Medic 10",
-            "location": "Station M10"
-        },
-        {
-            "id": "Medic 11",
-            "location": "Station M11"
-        },
-        {
-            "id": "Medic 12",
-            "location": "City // HQ"
-        },
-        {
-            "id": "Medic 13",
-            "location": "Honea Path"
-        },
-        {
-            "id": "Medic 14",
-            "location": "Powdersville"
-        },
-        {
-            "id": "Medic 15",
-            "location": "Wren"
-        },
-        {
-            "id": "Medic 16",
-            "location": "Williamston"
-        },
-        {
-            "id": "Medic 17",
-            "location": "City // HQ"
-        },
-        {
-            "id": "Medic 18",
-            "location": "City // HQ"
-        }
-    ],
-    "Level_Movement": {
-        "1": [
-            "Zone A"
-        ],
-        "2": [
-            "Zone B"
-        ],
-        "3": [
-            "Zone C"
-        ],
-        "4": [
-            "Zone D"
-        ],
-        "5": [
-            "Zone E"
-        ],
-        "6": [
-            "Zone F"
-        ],
-        "7": [
-            "Zone G"
-        ],
-        "8": [
-            "Zone H"
-        ],
-        "9": [
-            "Zone I"
-        ],
-        "10": [
-            "Zone J"
-        ],
-        "11": [
-            "Zone K"
-        ],
-        "12": [
-            "Zone L"
-        ],
-        "13": [
-            "Zone M"
-        ],
-        "14": [
-            "Zone N"
-        ],
-        "15": [
-            "Zone O"
-        ],
-        "16": [
-            "Zone P"
-        ],
-        "17": [
-            "Zone Q"
-        ]
-    }
+  "trucks": [
+    {"id": "Medic 0", "location": "City // HQ"},
+    {"id": "Medic 1", "location": "City // HQ"},
+    {"id": "Medic 2", "location": "Rock Springs"},
+    {"id": "Medic 3", "location": "Homeland Park"},
+    {"id": "Medic 4", "location": "Williamston"},
+    {"id": "Medic 5", "location": "Rock Springs"},
+    {"id": "Medic 6", "location": "Iva"},
+    {"id": "Medic 7", "location": "Pendleton"},
+    {"id": "Medic 8", "location": "Townville"},
+    {"id": "Medic 9", "location": "Centerville"},
+    {"id": "Medic 10", "location": "City // HQ"},
+    {"id": "Medic 11", "location": "City // HQ"},
+    {"id": "Medic 12", "location": "City // HQ"},
+    {"id": "Medic 13", "location": "Honea Path"},
+    {"id": "Medic 14", "location": "Powdersville"},
+    {"id": "Medic 15", "location": "Wren"},
+    {"id": "Medic 16", "location": "Williamston"},
+    {"id": "Medic 17", "location": "City // HQ"},
+    {"id": "Medic 18", "location": "City // HQ"}
+  ],
+  "Level_Movement": {
+    "1": ["Medshore HQ"],
+    "2": ["Fire Station 1 - Liberty HWY"],
+    "3": ["Rock Springs", "West Anderson", "White Plains"],
+    "4": ["Rock Springs", "West Anderson", "White Plains", "76/Welpine"],
+    "5": ["Rock Springs", "White Plains", "76 & Welpine", "WestGate", "81/Fred Dean"],
+    "6": ["Rock Springs", "White Plains", "Whitefield", "WestGate", "81/Fred Dean", "Liberty Hwy"],
+    "7": ["Rock Springs", "White Plains", "76 & Welpine", "WestGate", "81/Fred Dean", "HQ", "Whitefield"],
+    "8": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton"],
+    "9": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton", "Powdersville"],
+    "10": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton", "Powdersville", "Townville"],
+    "11": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ"],
+    "12": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ", "HopeWell"],
+    "13": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ", "HopeWell", "North Campus"],
+    "14": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "West Anderson", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ", "HopeWell", "North Campus", "HQ"],
+    "15": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "Centerville", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ", "HopeWell", "North Campus", "HQ", "West Anderson", "76 & Welpine"],
+    "16": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "Centerville", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ", "HopeWell", "North Campus", "HQ", "West Anderson", "76 & Welpine", "Whitefield"],
+    "17": ["Rock Springs", "Homeland Park", "Honea Path", "Wren", "Iva", "Centerville", "Williamston", "Pendleton", "Powdersville", "Townville", "HQ", "HopeWell", "North Campus", "HQ", "HQ", "West Anderson", "76 & Welpine", "Whitefield"]
+  }
 }
