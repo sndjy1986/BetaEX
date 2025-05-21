@@ -110,7 +110,7 @@ body.dark-mode {
 </div>
 <h1>Dispatch Center</h1>
 <!-- System Status Box -->
-<div class="status-box {% if available_trucks &lt;= 3 %}blink-red{% endif %}" id="statusBox">
+<div class="status-box {% if available_trucks <= 3 %}blink-red{% endif %}" id="statusBox">
         System Status Level: {{ available_trucks }} Truck(s) Available
     </div>
 <p><a href="/availability">Manage Availability</a> |
