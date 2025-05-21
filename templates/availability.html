@@ -49,7 +49,7 @@ body.dark-mode {
                 {% if status[truck['id']] not in ["out", "logistics"] %}
                     <li>
 <label>
-<input %}="" %}checked{%="" endif="" if="" name="available" status[truck['id']]="available" type="checkbox" value="{{ truck['id'] }}" {%=""/>
+<input type="checkbox" name="available" value="{{ truck['id'] }}" {% if status[truck['id']] == 'available' %}checked{% endif %}>
                             {{ truck['id'] }} ({{ truck.location }})
                         </label>
 </li>
