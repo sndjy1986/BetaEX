@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <script>
@@ -20,9 +21,8 @@ html.dark-mode, body.dark-mode {
 }
 </style>
 
-</style>
-    <title>Medshore Dispatch Dashboard</title>
-    <style>
+<title>Medshore Dispatch Dashboard</title>
+<style>
 .flash-row {
     animation: flashRedRow 1s infinite;
 }
@@ -103,54 +103,41 @@ body.dark-mode {
 }
 </style>
 
-</style>
 </head>
 <body>
-
-
 <div style="position: absolute; top: 10px; right: 20px;">
-    <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
+<a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
 </div>
-
-    <h1>Dispatch Center</h1>
-
-    <!-- System Status Box -->
-    <div id="statusBox" class="status-box {% if available_trucks <= 3 %}blink-red{% endif %}">
+<h1>Dispatch Center</h1>
+<!-- System Status Box -->
+<div class="status-box {% if available_trucks &lt;= 3 %}blink-red{% endif %}" id="statusBox">
         System Status Level: {{ available_trucks }} Truck(s) Available
     </div>
-
-    <p><a href="/availability">Manage Availability</a> |
+<p><a href="/availability">Manage Availability</a> |
        <a href="/admin">Admin Console</a></p>
-
-    <form method="POST" action="/dispatch">
-        <label>Select a truck that was sent out:</label><br>
-        <select name="truck_id">
+<form action="/dispatch" method="POST">
+<label>Select a truck that was sent out:</label><br/>
+<select name="truck_id">
             {% for truck in trucks %}
                 {% if status[truck.id] == "available" %}
                     <option value="{{ truck.id }}">{{ truck.id }} - {{ truck.location }}</option>
                 {% endif %}
             {% endfor %}
         </select>
-        <button type="submit">Dispatch</button>
-    </form>
-
-    <h2>Truck Status</h2>
-    <ul>
+<button type="submit">Dispatch</button>
+</form>
+<h2>Truck Status</h2>
+<ul>
         {% for truck in trucks %}
             {% if status[truck.id] != "unavailable" %}
                 <li id="truck-{{ truck.id }}">
-                    <span class="{% if truck.id in flash_trucks %}flash{% endif %}">{{ truck.id }}</span>:
-                    <span class="{% if truck.id in flash_trucks %}flash {% endif %}
-                        {% if status[truck.id] == 'available' %}status-available
-                        {% elif status[truck.id] == 'out' %}status-out
-                        {% elif status[truck.id] == 'logistics' %}status-logistics
-                        {% elif status[truck.id] == 'destination' %}status-destination
-                        {% endif %}">
+<span class="{% if truck.id in flash_trucks %}flash{% endif %}">{{ truck.id }}</span>:
+                    <span class="{% if truck.id in flash_trucks %}flash {% endif %} {% if status[truck.id] == 'available' %}status-available {% elif status[truck.id] == 'out' %}status-out {% elif status[truck.id] == 'logistics' %}status-logistics {% elif status[truck.id] == 'destination' %}status-destination {% endif %}">
                         {{ status[truck.id] }}
                     </span>
 
                     {% if status[truck.id] == "logistics" or status[truck.id] == "destination" %}
-                        <span id="timer-{{ truck.id }}" data-start="{{ logistics_times[truck.id] }}"></span>
+                        <span data-start="{{ logistics_times[truck.id] }}" id="timer-{{ truck.id }}"></span>
                         {% if status[truck.id] == "logistics" %}
                             <a href="/reset/{{ truck.id }}">[Reset]</a>
                         {% else %}
@@ -158,7 +145,7 @@ body.dark-mode {
                         {% endif %}
                     {% elif status[truck.id] == "out" %}
                         <a href="/destination/{{ truck.id }}">[Destination]</a>
-                        <a href="/reset/{{ truck.id }}">[Available]</a>
+<a href="/reset/{{ truck.id }}">[Available]</a>
                     {% elif status[truck.id] == "available" %}
                         <a href="/logistics/{{ truck.id }}">[Logistics]</a>
                     {% endif %}
@@ -166,17 +153,15 @@ body.dark-mode {
             {% endif %}
         {% endfor %}
     </ul>
-
-    <div id="log">
-        <h3>Activity Log</h3>
-        <ul>
+<div id="log">
+<h3>Activity Log</h3>
+<ul>
             {% for entry in activity_log %}
                 <li>{{ entry }}</li>
             {% endfor %}
         </ul>
-    </div>
-
-    <script>
+</div>
+<script>
         function updateTimers() {
             const timerSpans = document.querySelectorAll('[id^="timer-"]');
             const now = new Date().getTime();
@@ -229,11 +214,10 @@ function toggleDarkMode() {
 
 </script>
 <p style="text-align: center; margin-top: 30px;"><a href="/status">View System Status Page</a></p>
-
 <!-- Modal for Posting Plan -->
 <div id="postingModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
      background:white; padding:20px; border:2px solid black; border-radius:10px; z-index:1000;">
-    <h3>Posting Plan for {{ available_trucks }} Truck(s)</h3>
+<h3>Posting Plan for {{ available_trucks }} Truck(s)</h3>
     {% if posting_plan %}
         <ul>
             {% for location in posting_plan %}
@@ -253,5 +237,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-</body>
+<script>
+function toggleDarkMode() {
+    document.documentElement.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", document.documentElement.classList.contains("dark-mode"));
+}
+document.addEventListener("DOMContentLoaded", () => {
+    // modal trigger
+    const statusBox = document.getElementById("statusBox");
+    if (statusBox) {
+        statusBox.addEventListener("click", () => {
+            const modal = document.getElementById("postingModal");
+            if (modal) modal.style.display = "block";
+        });
+    }
+});
+</script></body>
 </html>
