@@ -67,7 +67,7 @@ body.dark-mode {
 </head>
 <body>
 <h2>System Status</h2>
-<div class="status-box {% if available_trucks &lt;= 3 %}blink-red{% endif %}">
+<div class="status-box {% if available_trucks <= 3 %}blink-red{% endif %}">
     SYSTEM STATUS LEVEL: {{ available_trucks }} TRUCK(S) AVAILABLE
 </div>
 
