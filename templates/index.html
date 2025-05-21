@@ -113,7 +113,7 @@ body.dark-mode {
 <div class="status-box {% if available_trucks <= 3 %}blink-red{% endif %}" id="statusBox">
         System Status Level: {{ available_trucks }} Truck(s) Available
     </div>
-<p><a href="/availability">Manage Availability</a> |
+<p><a href="{{ url_for('availability') }}">Manage Availability</a> |
        <a href="/admin">Admin Console</a></p>
 <form action="/dispatch" method="POST">
 <label>Select a truck that was sent out:</label><br/>
@@ -213,7 +213,7 @@ function toggleDarkMode() {
 }
 
 </script>
-<p style="text-align: center; margin-top: 30px;"><a href="/status">View System Status Page</a></p>
+<p style="text-align: center; margin-top: 30px;"><a href="{{ url_for('system_status') }}">View System Status Page</a></p>
 <!-- Modal for Posting Plan -->
 <div id="postingModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
      background:white; padding:20px; border:2px solid black; border-radius:10px; z-index:1000;">
