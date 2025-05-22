@@ -1,260 +1,45 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
 <head>
-<script>
-if (localStorage.getItem("darkMode") === "true") {
-    document.documentElement.classList.add("dark-mode");
-}
-</script>
-<style>
-html.dark-mode, body.dark-mode {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-}
-
-<style>
-.dark-mode #postingModal {
-    background-color: #444;
-    color: #fff;
-    border-color: #888;
-}
-</style>
-
-<title>Medshore Dispatch Dashboard</title>
-<style>
-.flash-row {
-    animation: flashRedRow 1s infinite;
-}
-@keyframes flashRedRow {
-    0%, 100% { background-color: transparent; }
-    50% { background-color: red; color: white; }
-}
-.status-available {
-    color: green;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.status-logistics {
-    color: red;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.status-destination {
-    color: orange;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.status-out {
-    color: blue;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* Dark mode styles */
-body.dark-mode {
-    background-color: #1e1e1e;
-    color: #f0f0f0;
-}
-.dark-mode .status-box {
-    background-color: #444;
-    color: #fff;
-    border-color: #888;
-}
-.dark-mode #log {
-    background-color: #444;
-    color: #f0f0f0;
-}
-
-
-.status-box {
-    padding: 10px;
-    background-color: #ccc;
-    color: black;
-    font-weight: bold;
-    border: 2px solid black;
-    border-radius: 8px;
-    width: fit-content;
-    margin-bottom: 15px;
-}
-.blink-red {
-    animation: blinkRedBg 1s infinite;
-}
-@keyframes blinkRedBg {
-    0%, 100% { background-color: #ccc; color: black; }
-    50% { background-color: red; color: white; }
-}
-#log {
-    background-color: #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    max-height: 30vh;
-    overflow-y: auto;
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 30px;
-}
-
-<style>
-.dark-mode #postingModal {
-    background-color: #444;
-    color: #fff;
-    border-color: #888;
-}
-</style>
-
+    <title>Truck Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .truck-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .truck-card {
+            border: 1px solid #999;
+            padding: 10px;
+            min-width: 180px;
+        }
+    </style>
 </head>
 <body>
-<div style="position: absolute; top: 10px; left: 20px;">
-<a href="https://forms.microsoft.com/pages/responsepage.aspx?id=Zh-exeJVn0SAfe_1FF9Zi2FaRW6gaHhKjeF02t2Aq8tURFAwVDVVUEVVRzZRODNTNkgyUFJNMDBHSS4u" target="_blank">Truck Form</a>
-</div>
-<div style="position: absolute; top: 10px; right: 20px;">
-<a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
-</div>
-<h1>Dispatch Center</h1>
-<!-- System Status Box -->
-<div class="status-box {% if available_trucks <= 3 %}blink-red{% endif %}" id="statusBox">
-        System Status Level: {{ available_trucks }} Truck(s) Available
+    <div style="position: absolute; top: 10px; left: 20px;">
+        <a href="https://forms.microsoft.com/pages/responsepage.aspx?id=Zh-exeJVn0SAfe_1FF9Zi2FaRW6gaHhKjeF02t2Aq8tURFAwVDVVUEVVRzZRODNTNkgyUFJNMDBHSS4u" target="_blank">Truck Form</a>
     </div>
-<p><a href="{{ url_for('availability') }}">Manage Availability</a> |
-       <a href="/admin">Admin Console</a></p>
-<form action="/dispatch" method="POST">
-<label>Select a truck that was sent out:</label><br/>
-<select name="truck_id">
-            {% for truck in trucks %}
-                {% if status[truck.id] == "available" %}
-                    {% endif %}
-{% endfor %}
-        </select>
-<button type="submit">Dispatch</button>
-</form>
-<h2>Truck Status</h2>
-<ul>
+
+    <h2>TRUCK STATUS</h2>
+    <div class="truck-grid">
         {% for truck in trucks %}
-            {% if status[truck.id] != "unavailable" %}
-                <li id="truck-{{ truck.id }}">
-<span class="{% if truck.id in flash_trucks %}flash{% endif %}">{{ truck.id }}</span>:
-                    <span class="{% if truck.id in flash_trucks %}flash {% endif %} {% if status[truck.id] == 'available' %}status-available {% elif status[truck.id] == 'out' %}status-out {% elif status[truck.id] == 'logistics' %}status-logistics {% elif status[truck.id] == 'destination' %}status-destination {% endif %}">
-                        {{ status[truck.id] }}
-                    </span>
-
-                    {% if status[truck.id] == "logistics" or status[truck.id] == "destination" %}
-                        <span data-start="{{ logistics_times[truck.id] }}" id="timer-{{ truck.id }}"></span>
-                        {% if status[truck.id] == "logistics" %}
-                            <a href="/reset/{{ truck.id }}">[Reset]</a>
-                        {% else %}
-                            <a href="/reset/{{ truck.id }}">[Reset]</a>
-                        {% endif %}
-                    {% elif status[truck.id] == "out" %}
-                        <a href="/destination/{{ truck.id }}">[Destination]</a>
-<a href="/reset/{{ truck.id }}">[Available]</a>
-                    {% elif status[truck.id] == "available" %}
-                        <a href="/logistics/{{ truck.id }}">[Logistics]</a>
-                    {% endif %}
-                </li>{% endfor %}
-    </ul>
-<div id="log">
-<h3>Activity Log</h3>
-<ul>
-            {% for entry in activity_log %}
-                <li>{{ entry }}</li>
-            {% endfor %}
-        </ul>
-</div>
-<script>
-        function updateTimers() {
-            const timerSpans = document.querySelectorAll('[id^="timer-"]');
-            const now = new Date().getTime();
-
-            timerSpans.forEach(span => {
-                const startTime = new Date(span.getAttribute("data-start")).getTime();
-                const parent = span.closest("li");
-                const statusClass = parent.querySelector("span:nth-of-type(2)").className;
-
-                let duration = 10 * 60 * 1000; // logistics default
-                if (statusClass.includes("status-destination")) {
-                    duration = 20 * 60 * 1000; // destination (20 minutes)
-                }
-
-                const remaining = duration - (now - startTime);
-                if (remaining > 0) {
-                    const mins = Math.floor(remaining / 60000);
-                    const secs = Math.floor((remaining % 60000) / 1000);
-                    span.textContent = ` - ${mins}:${secs.toString().padStart(2, '0')} remaining`;
-                } else {
-                    if (remaining <= 0) {
-                    
-    span.textContent = "";
-    parent.classList.add("flash-row");
-    
-                    const nameSpan = parent.querySelector("span:first-of-type");
-                    if (nameSpan) {
-                        nameSpan.classList.add("flash-red");
-                    }
-                }
-                }
-            });
-        }
-
-        setInterval(updateTimers, 1000);
-        updateTimers();
-
-        // Auto-refresh every 3 minutes
-        setTimeout(() => {
-            location.reload();
-        }, 180000);
-
-        {% if show_admin_alert %}
-            alert("NOTIFY ADMIN OF SYSTEM STATUS");
-        {% endif %}
-    
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-}
-
-</script>
-<p style="text-align: center; margin-top: 30px;"><a href="{{ url_for('system_status') }}">View System Status Page</a></p>
-<!-- Modal for Posting Plan -->
-<div id="postingModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
-     background:white; padding:20px; border:2px solid black; border-radius:10px; z-index:1000;">
-<h3>Posting Plan for {{ available_trucks }} Truck(s)</h3>
-    {% if posting_plan %}
-        <ul>
-            {% for location in posting_plan %}
-                <li>{{ location }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No posting plan defined.</p>
-    {% endif %}
-    <button onclick="document.getElementById('postingModal').style.display='none'">Close</button>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("statusBox").addEventListener("click", function() {
-        document.getElementById("postingModal").style.display = "block";
-    });
-});
-</script>
-
-<script>
-function toggleDarkMode() {
-    document.documentElement.classList.toggle("dark-mode");
-    localStorage.setItem("darkMode", document.documentElement.classList.contains("dark-mode"));
-}
-document.addEventListener("DOMContentLoaded", () => {
-    // modal trigger
-    const statusBox = document.getElementById("statusBox");
-    if (statusBox) {
-        statusBox.addEventListener("click", () => {
-            const modal = document.getElementById("postingModal");
-            if (modal) modal.style.display = "block";
-        });
-    }
-});
-</script>
-<h2>TRUCK STATUS</h2>{% endfor %}
-</div>
-
+            {% if truck['id'].startswith("Medic ") or truck['id'].startswith("QRV ") %}
+            <div class="truck-card">
+                <strong>{{ truck['id'] }}</strong><br>
+                Status: {{ status[truck['id']] }}<br>
+                {% if status[truck['id']] == 'available' %}
+                <form action="{{ url_for('dispatch') }}" method="post">
+                    <input type="hidden" name="truck_id" value="{{ truck['id'] }}">
+                    <button type="submit">Dispatch</button>
+                </form>
+                {% endif %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </body>
 </html>
