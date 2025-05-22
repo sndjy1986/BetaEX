@@ -123,9 +123,7 @@ body.dark-mode {
 <select name="truck_id">
             {% for truck in trucks %}
                 {% if status[truck.id] == "available" %}
-                    <option value="{{ truck.id }}">{{ truck.id }} - {{ truck.location }}</option>
-                {% endif %}
-            {% endfor %}
+                    <option value="{{ truck.id }}">{{ truck.id }} - {{ truck.location }}</option>{% endfor %}
         </select>
 <button type="submit">Dispatch</button>
 </form>
@@ -152,9 +150,7 @@ body.dark-mode {
                     {% elif status[truck.id] == "available" %}
                         <a href="/logistics/{{ truck.id }}">[Logistics]</a>
                     {% endif %}
-                </li>
-            {% endif %}
-        {% endfor %}
+                </li>{% endfor %}
     </ul>
 <div id="log">
 <h3>Activity Log</h3>
@@ -256,10 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
-<h2>TRUCK STATUS</h2>
-
-    {% endif %}
-  {% endfor %}
+<h2>TRUCK STATUS</h2>{% endfor %}
 </div>
 
 </body>
