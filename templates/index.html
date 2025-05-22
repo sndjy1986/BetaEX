@@ -20,26 +20,48 @@
     </style>
 </head>
 <body>
+    <h2>System Status Level: {{ available_trucks }} Truck(s) Available</h2>
+
     <div style="position: absolute; top: 10px; left: 20px;">
         <a href="https://forms.microsoft.com/pages/responsepage.aspx?id=Zh-exeJVn0SAfe_1FF9Zi2FaRW6gaHhKjeF02t2Aq8tURFAwVDVVUEVVRzZRODNTNkgyUFJNMDBHSS4u" target="_blank">Truck Form</a>
     </div>
 
     <h2>TRUCK STATUS</h2>
-    <div class="truck-grid">
-        {% for truck in trucks %}
-            {% if truck['id'].startswith("Medic ") or truck['id'].startswith("QRV ") %}
-            <div class="truck-card">
-                <strong>{{ truck['id'] }}</strong><br>
-                Status: {{ status[truck['id']] }}<br>
-                {% if status[truck['id']] == 'available' %}
-                <form action="{{ url_for('dispatch') }}" method="post">
-                    <input type="hidden" name="truck_id" value="{{ truck['id'] }}">
-                    <button type="submit">Dispatch</button>
-                </form>
-                {% endif %}
-            </div>
+<h3>Medic Trucks</h3>
+<div class="truck-grid">
+    {% for truck in trucks %}
+        {% if truck['id'].startswith("Medic ") %}
+        <div class="truck-card">
+            <strong>{{ truck['id'] }}</strong><br>
+            Status: {{ status[truck['id']] }}<br>
+            {% if status[truck['id']] == 'available' %}
+            <form action="{{ url_for('dispatch') }}" method="post">
+                <input type="hidden" name="truck_id" value="{{ truck['id'] }}">
+                <button type="submit">Dispatch</button>
+            </form>
             {% endif %}
-        {% endfor %}
-    </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<h3>QRV Trucks</h3>
+<div class="truck-grid">
+    {% for truck in trucks %}
+        {% if truck['id'].startswith("QRV ") %}
+        <div class="truck-card">
+            <strong>{{ truck['id'] }}</strong><br>
+            Status: {{ status[truck['id']] }}<br>
+            {% if status[truck['id']] == 'available' %}
+            <form action="{{ url_for('dispatch') }}" method="post">
+                <input type="hidden" name="truck_id" value="{{ truck['id'] }}">
+                <button type="submit">Dispatch</button>
+            </form>
+            {% endif %}
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
 </body>
 </html>
