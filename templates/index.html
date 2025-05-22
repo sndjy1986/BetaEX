@@ -256,38 +256,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
-<h2>ALS TRUCKS</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  {% for truck in trucks %}
-    {% if truck['id'].startswith("Medic ") %}
-    <div style="border: 1px solid #999; padding: 10px; min-width: 180px;">
-      <strong>{{ truck['id'] }}</strong><br>
-      Status: {{ status[truck['id']] }}<br>
-      {% if status[truck['id']] == 'available' %}
-      <form action="{{ url_for('dispatch') }}" method="post">
-        <input type="hidden" name="truck_id" value="{{ truck['id'] }}">
-        <button type="submit">Dispatch</button>
-      </form>
-      {% endif %}
-    </div>
-    {% endif %}
-  {% endfor %}
-</div>
+<h2>TRUCK STATUS</h2>
 
-<h2>QRV TRUCKS</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  {% for truck in trucks %}
-    {% if truck['id'].startswith("QRV ") %}
-    <div style="border: 1px solid #999; padding: 10px; min-width: 180px;">
-      <strong>{{ truck['id'] }}</strong><br>
-      Status: {{ status[truck['id']] }}<br>
-      {% if status[truck['id']] == 'available' %}
-      <form action="{{ url_for('dispatch') }}" method="post">
-        <input type="hidden" name="truck_id" value="{{ truck['id'] }}">
-        <button type="submit">Dispatch</button>
-      </form>
-      {% endif %}
-    </div>
     {% endif %}
   {% endfor %}
 </div>
