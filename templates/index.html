@@ -123,7 +123,8 @@ body.dark-mode {
 <select name="truck_id">
             {% for truck in trucks %}
                 {% if status[truck.id] == "available" %}
-                    <option value="{{ truck.id }}">{{ truck.id }} - {{ truck.location }}</option>{% endfor %}
+                    {% endif %}
+{% endfor %}
         </select>
 <button type="submit">Dispatch</button>
 </form>
